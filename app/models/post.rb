@@ -1,5 +1,7 @@
 class Post < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
+	has_many :votes
+	has_many :users_who_voted, through: :votes, source: :user
 
 	belongs_to :user
 

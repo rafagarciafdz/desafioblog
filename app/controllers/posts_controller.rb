@@ -67,6 +67,14 @@ class PostsController < ApplicationController
     end
   end
 
+  #Creacòn del Voto
+  def upvote
+    @vote = Vote.find_or_initialize_by(user: current_user, post: @post)
+
+    return destroy_and_redirect if @vote.persisted?
+    save_and_redirect
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     #def set_post
@@ -82,6 +90,19 @@ class PostsController < ApplicationController
       authenticate_user!
       unless current_user.moderator?
         redirect_to root_path, alert: "No tienes acceso"
+      end
+    end
+
+    def destroy_and_redirect
+      @vote.destroy
+      redirect_to @post, notice: "Tu voto fue anulado"
+    end
+
+    def save_and_redirect
+      if @vote.save
+        redirect_to @post, notice: "Tu voto fue creado exitosamente"
+      else
+        redirect_to @post, notice: @vote.errors.full_messages.join(", ")
       end
     end
 end

@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
   
-  has_many :posts, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :votes
+  has_many :voted_post, through: :votes, source: :post
 
   enum role: [:guest, :moderator]
 
