@@ -2,9 +2,16 @@ source 'https://rubygems.org'
 
 #DB Postgresql
 gem 'pg'
-
 #Devise Sign IN, Sign UP, LOG IN Tools
 gem 'devise'
+#Control de acceso a usuarios
+gem 'cancancan'
+#dotenv - variables de entorno para manejo de seguridad
+gem 'dotenv-rails', groups: [:development, :test]
+#interaccion con archivos
+gem 'carrierwave'
+#creacòn e thumbs de imagenes
+gem 'mini_magick'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

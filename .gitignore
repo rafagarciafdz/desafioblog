@@ -7,6 +7,12 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore environment variables
+/.env
+
+# Ignore photos of the repository
+/public/uploads
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
