@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #DB Postgresql
 gem 'pg'
 
-#Devise
+#Devise Sign IN, Sign UP, LOG IN Tools
 gem 'devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
