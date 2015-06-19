@@ -1,3 +1,15 @@
 <div class="comment" style="background-color:gray">
-	<%= comment.comment %>
+	<p>
+	  <strong>Comment:</strong>
+	  <%= comment.comment %>
+	</p>
+
+	<p>
+	  <strong>Votes:</strong>
+	  <%= comment.votes.count %>
+	  <strong>Vote:</strong>
+	  <%= link_to "Vote: +1", post_comment_upvote_path(comment.post, comment) %>
+	</p>
+	
+	
 </div>

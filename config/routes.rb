@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'comments/create'
 
   resources :posts do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create] do
+      get 'upvote'
+    end
     member do
       get 'upvote'
     end

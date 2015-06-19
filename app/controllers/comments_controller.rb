@@ -12,8 +12,38 @@ class CommentsController < ApplicationController
   	end
   end
 
+  #Creacòn del Voto DUDAAAAAAAA
+  def upvote
+    #@vote = Vote.find_or_initialize_by(user: current_user, post: @post)
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:comment_id])
+    @vote = @comment.votes.build(user:@current_user)
+    
+    if @comment.users_who_voted.include? current_user
+      @comment.votes.where(user:current_user).first.delete
+      redirect_to @post, notice: "Tu voto ha sido borrado"
+    elsif @vote.save
+      redirect_to @post, notice: "Tu voto ha sido guardado"
+    else
+      redirect_to @post, notice: "Tu voto no ha podido ser"
+    end
+  end
+
   private
   def comment_params
   	params.require(:comment).permit(:comment)
+  end
+
+  def destroy_and_redirect
+    @vote.destroy
+    redirect_to @post, notice: "Tu voto fue anulado"
+  end
+
+  def save_and_redirect
+    if @vote.save
+      redirect_to @post, notice: "Tu voto fue creado exitosamente"
+    else
+      redirect_to @post, notice: @vote.errors.full_messages.join(", ")
+    end
   end
 end

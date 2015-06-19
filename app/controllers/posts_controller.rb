@@ -13,8 +13,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @comment = @post.comments.build
     @last_comments = @post.comments.last(5)
+    @comment = @post.comments.build
   end
 
   # GET /posts/new
@@ -70,6 +70,8 @@ class PostsController < ApplicationController
   #Creacòn del Voto
   def upvote
     @vote = Vote.find_or_initialize_by(user: current_user, post: @post)
+    #@post = Post.find(params[:id])
+    #@vote = @post.votes.build(user:@current_user)
 
     return destroy_and_redirect if @vote.persisted?
     save_and_redirect
