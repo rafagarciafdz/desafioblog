@@ -4,12 +4,22 @@ class CommentsController < ApplicationController
   	@post = Post.find(params[:post_id])
   	@comment = @post.comments.build(comment_params)
     @comment.user = current_user
-  	@comment.save
-  	if @comment.save
-  		redirect_to @post , notice: "El comentario fue creado correctamente"
-  	else
-  		redirect_to @post , alert: "El comentario no ha podido ser creado creado"
-  	end
+
+    respond_to do |format|
+      if @comment.save
+        format.html {redirect_to @post , notice: "El comentario fue creado correctamente"}
+        format.js
+      else
+        format.html {redirect_to @post , alert: "El comentario no ha podido ser creado creado"}
+        format.js
+      end
+    end
+  	#@comment.save
+  	#if @comment.save
+  	#	redirect_to @post , notice: "El comentario fue creado correctamente"
+  	#else
+  	#	redirect_to @post , alert: "El comentario no ha podido ser creado creado"
+  	#end
   end
 
   #Creacòn del Voto DUDAAAAAAAA
