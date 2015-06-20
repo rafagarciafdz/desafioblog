@@ -7,7 +7,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-  #  @posts = Post.all
+    #@posts = Post.all
+    #render json: params
+    @query = params[:q]
+    if @query.nil?
+      @posts = Post.all
+    else
+      @posts = Post.where("title ilike ? or content ilike ?", "%#{@query}%", "%#{@query}%")
+    end
   end
 
   # GET /posts/1
