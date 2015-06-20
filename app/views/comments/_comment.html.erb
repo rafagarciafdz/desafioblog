@@ -8,7 +8,11 @@
 	  <strong>Votes:</strong>
 	  <%= comment.votes.count %>
 	  <strong>Vote:</strong>
-	  <%= link_to "Vote: +1", post_comment_upvote_path(comment.post, comment) %>
+	  <% if comment.users_who_voted.include? current_user %>
+	  	<%= link_to "Vote: -1", post_comment_upvote_path(comment.post, comment) %>
+	  <% else %>
+	  	<%= link_to "Vote: +1", post_comment_upvote_path(comment.post, comment) %>
+	  <% end %>
 	</p>
 	
 	
