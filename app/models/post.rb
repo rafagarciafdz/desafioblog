@@ -8,4 +8,6 @@ class Post < ActiveRecord::Base
 	validates :title, presence: true
 
 	mount_uploader :picture, PictureUploader
+
+	paginates_per 10
 end

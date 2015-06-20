@@ -12,6 +12,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'carrierwave'
 #creacòn e thumbs de imagenes
 gem 'mini_magick'
+#paginación
+gem 'kaminari'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

@@ -15,6 +15,8 @@ class PostsController < ApplicationController
     else
       @posts = Post.where("title ilike ? or content ilike ?", "%#{@query}%", "%#{@query}%")
     end
+
+    @posts = @posts.page params[:page]
   end
 
   # GET /posts/1
