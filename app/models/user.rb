@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :votes, as: :votable
+  has_many :votes, as: :votable, dependent: :destroy
   has_many :voted_post, through: :votes, source: :post
   has_many :voted_comments, through: :votes, source: :comment
 

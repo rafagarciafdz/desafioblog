@@ -37,7 +37,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right">
       	<% if user_signed_in? %>
-    			<span> Hola <%= current_user.name %> </span>
+    			<li><a>Hola <%= current_user.name %></a></li>
     			<li><%= link_to "Salir", destroy_user_session_path, method: "delete" %></li>
     		<% else %>
     			<li><%= link_to "Ingresar", new_user_session_path %></li>
