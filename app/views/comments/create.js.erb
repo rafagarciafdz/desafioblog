@@ -1,5 +1,5 @@
 <% if @comment.persisted? %>
-	$("#comments_count").text("<%= @post.comments.count %>");
+	$("#comments_count").html("<strong>Comments: </strong> <%= @post.comments.count %>");
 	$("#comments").append("<%= j render @comment %>");
 	$("textarea").val("")
 <% else %>

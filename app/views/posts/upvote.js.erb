@@ -1,0 +1,3 @@
+post_count = $("#<%= @post.id %>").html()
+post_count = parseInt(post_count)
+$("#<%= @post.id %>").html(post_count + <%= @increment %>)

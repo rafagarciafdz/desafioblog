@@ -6,12 +6,12 @@
 
 	<p>
 	  <strong>Votes:</strong>
-	  <%= comment.votes.count %>
+	  <span id="<%= comment.id %>"><%= comment.votes.count %></span>
 	  <strong>Vote:</strong>
 	  <% if comment.users_who_voted.include? current_user %>
-	  	<%= link_to "Vote: -1", post_comment_upvote_path(comment.post, comment) %>
+	  	<%= link_to "Vote: -1", post_comment_upvote_path(comment.post, comment), remote: true %>
 	  <% else %>
-	  	<%= link_to "Vote: +1", post_comment_upvote_path(comment.post, comment) %>
+	  	<%= link_to "Vote: +1", post_comment_upvote_path(comment.post, comment), remote: true %>
 	  <% end %>
 	</p>
 	

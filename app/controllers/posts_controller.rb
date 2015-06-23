@@ -22,7 +22,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @last_comments = @post.comments.last(5)
+    #@last_comments = @post.comments.last(5)
+    @last_comments = @post.comments.all
     @comment = @post.comments.build
   end
 
@@ -45,11 +46,9 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
-        #format.js
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
-        #format.js
       end
     end
   end
@@ -80,12 +79,28 @@ class PostsController < ApplicationController
 
   #Creacòn del Voto
   def upvote
-    @vote = Vote.find_or_initialize_by(user: current_user, post: @post)
-    #@post = Post.find(params[:id])
-    #@vote = @post.votes.build(user:@current_user)
+    #@vote = Vote.find_or_initialize_by(user: current_user, post: @post)
+    @post = Post.find(params[:id])
+    @vote = @post.votes.build(user:@current_user)
 
-    return destroy_and_redirect if @vote.persisted?
-    save_and_redirect
+    respond_to do |format|
+      if @post.users_who_voted.include? current_user
+        @increment = -1
+        @post.votes.where(user:current_user).first.delete
+        format.html {redirect_to @post, notice: "Tu voto ha sido borrado"}
+        format.js
+      elsif @vote.save
+        @increment = +1
+        format.html {redirect_to @post, notice: "Tu voto ha sido guardado"}
+        format.js
+      else
+        @increment = 0
+        format.html {redirect_to @post, notice: "Tu voto no ha podido ser"}
+        format.js
+      end
+    end
+    #return destroy_and_redirect if @vote.persisted?
+    #save_and_redirect
   end
 
   private

@@ -29,13 +29,21 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:comment_id])
     @vote = @comment.votes.build(user:@current_user)
     
-    if @comment.users_who_voted.include? current_user
-      @comment.votes.where(user:current_user).first.delete
-      redirect_to @post, notice: "Tu voto ha sido borrado"
-    elsif @vote.save
-      redirect_to @post, notice: "Tu voto ha sido guardado"
-    else
-      redirect_to @post, notice: "Tu voto no ha podido ser"
+    respond_to do |format|
+      if @comment.users_who_voted.include? current_user
+        @increment = -1
+        @comment.votes.where(user:current_user).first.delete
+        format.html {redirect_to @post, notice: "Tu voto ha sido borrado"}
+        format.js
+      elsif @vote.save
+        @increment = +1
+        format.html {redirect_to @post, notice: "Tu voto ha sido guardado"}
+        format.js
+      else
+        @increment = 0
+        format.html {redirect_to @post, notice: "Tu voto no ha podido ser"}
+        format.js
+      end
     end
   end
 
