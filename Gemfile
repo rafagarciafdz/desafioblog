@@ -14,6 +14,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 #paginación
 gem 'kaminari'
+#autocompleta informacion para hacer pruebas
+#gem 'faker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

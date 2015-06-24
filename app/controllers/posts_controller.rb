@@ -17,6 +17,11 @@ class PostsController < ApplicationController
     end
 
     @posts = @posts.page params[:page]
+    respond_to do |format|
+      format.html
+      format.json
+      format.js
+    end
   end
 
   # GET /posts/1

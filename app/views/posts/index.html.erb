@@ -12,23 +12,16 @@
   </thead>
 
   <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= image_tag(post.picture.thumb) %></td>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.comments.count %></td>
-        <td><%= post.votes.count %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) if can? :edit, post %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if can? :edit, post %></td>
-      </tr>
-    <% end %>
+    <div id="posts">
+      <%= render partial: "posts/post", collection: @posts %>
+    </div>
   </tbody>
 </table>
 
 <br>
 
-<%= paginate @posts %>
+<div id="pagination">
+  <%= paginate @posts %>
+</div>
 
 <%= link_to 'New Post', new_post_path %>

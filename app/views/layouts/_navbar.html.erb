@@ -31,7 +31,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search" method="GET">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search" name="q" <%= @q %> >
+          <input type="text" class="form-control" placeholder="Search" name="q" id="q"><%= @q %> >
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
@@ -47,3 +47,26 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<script>
+  $(q).on('keyup', function(event) {
+    var query = this.value;
+    $.ajax({
+      url: '<%= posts_path %>',
+      type: 'GET',
+      dataType: 'script',
+      data: {q: query},
+    })
+    .done(function() {
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+    
+    /* Act on the event */
+  });
+</script>
