@@ -11,9 +11,9 @@ class PostsController < ApplicationController
     #render json: params
     @query = params[:q]
     if @query.nil?
-      @posts = Post.all.page
+      @posts = Post.includes(:user).all.page
     else
-      @posts = Post.where("title ilike ? or content ilike ?", "%#{@query}%", "%#{@query}%")
+      @posts = Post.includes(:user).where("title ilike ? or content ilike ?", "%#{@query}%", "%#{@query}%")
     end
 
     @posts = @posts.page params[:page]

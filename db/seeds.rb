@@ -14,5 +14,5 @@ User.destroy_all
 user = User.create(email:"rafael@mail.com", password:"12345678", name:"Rafael")
 
 100.times do |i|
-	post = user.posts.create(title:"Soy el Post #{i}")
+	post = user.posts.create(title:"Soy el Post #{i}", content: "Soy el contenido del Post #{i}")
 end
