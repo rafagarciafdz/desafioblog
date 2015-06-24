@@ -1,2 +1,2 @@
-$("#posts").html("<%= j render partial: 'posts/post', collection: @posts %>")
+$("#posts").append("<%= j render partial: 'posts/post', collection: @posts %>")
 $("#pagination").html("<%= j paginate @posts %>")

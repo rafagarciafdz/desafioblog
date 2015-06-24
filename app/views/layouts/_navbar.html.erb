@@ -49,6 +49,21 @@
 </nav>
 
 <script>
+  var paginate = _.debounce(function(){
+    var current_top = $(window).scrollTop();
+    var document_end = $(document).height() - $(window).height() - 30;
+    var url = $(".next").children().attr("href");
+    if (current_top > document_end)
+      $.getScript(url)
+      .done(function() {
+        console.log("success");
+      })
+  }, 50)
+
+  $(window).scroll(function(event){
+    paginate();
+  });
+
   $(q).on('keyup', function(event) {
     var query = this.value;
     $.ajax({
@@ -62,9 +77,6 @@
     })
     .fail(function() {
       console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
     });
     
     /* Act on the event */
