@@ -16,6 +16,8 @@ gem 'mini_magick'
 gem 'kaminari'
 #detecta los casos n+1
 gem 'bullet', :group => "development"
+#
+gem 'fog'
 #autocompleta informacion para hacer pruebas
 #gem 'faker'
 
