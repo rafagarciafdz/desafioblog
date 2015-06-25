@@ -14,6 +14,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 #paginación
 gem 'kaminari'
+#detecta los casos n+1
+gem 'bullet', :group => "development"
 #autocompleta informacion para hacer pruebas
 #gem 'faker'
 
